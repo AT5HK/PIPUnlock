@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import "Tweak.h"
 
 @interface SBHomeScreenViewController : UIViewController
 @end
@@ -11,14 +12,14 @@
 
 %end
 
-%hook SBPIPWindow
--(void)addActiveOrientationObserver:(id)arg1 {
-	// do nothing
-	NSLog(@"called from: addActiveOrientationObserver:(id)arg1");
-	%orig;
-}
+// %hook SBPIPWindow
+// -(void)addActiveOrientationObserver:(id)arg1 {
+// 	// do nothing
+// 	NSLog(@"called from: addActiveOrientationObserver:(id)arg1");
+// 	%orig;
+// }
 
-%end
+// %end
 
 // %hook SBPIPWindowRootViewController
 // - (void)setActiveInterfaceOrientation:(long long)activeInterfaceOrientation { %log; %orig; }
@@ -116,20 +117,25 @@
 // -(void)_createOrInvalidateStashTabVisibilityPolicyProvider { %log; %orig; }
 // %end
 
-%hook SBPIPInteractionController
--(void)_handleGestureEndedState:(id)arg1 {
-	//do nothing
-	NSLog(@"the gesture ended, this is arg1: %@", arg1);
+PGPictureInPictureViewController *PGPVC;
+
+%hook PGPictureInPictureViewController
+
+-(void)viewDidLoad {
+	%log;
+	PGPVC = self;
+	%orig;
 }
 
-// -(void)_handleGestureBeganState:(id)arg1 {
-// 	//do nothing
-// 	NSLog(@"the gesture began, this is arg1: %@", arg1);
-// }
+%end
 
-// -(void)handlePanGesture:(id)arg1 {
-// 	NSLog(@"handle pan gesture, this is arg1: %@", arg1);
-// }
+%hook SBPIPInteractionController
+
+-(void)handlePanGesture:(id)arg1 {
+	NSLog(@"handle pan gesture, this is arg1: %@", arg1);
+	UIPanGestureRecognizer *panGesture = arg1;
+	PGPVC.view.center = [panGesture locationInView:panGesture.view]; 
+}
 %end
 
 %ctor {

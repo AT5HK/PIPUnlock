@@ -16,7 +16,7 @@ TWEAK_NAME = PGPUnlock
 
 PGPUnlock_FRAMEWORKS = UIKit
 
-PGPUnlock_FILES = Tweak.x
+PGPUnlock_FILES = Tweak.xm
 PGPUnlock_CFLAGS = -fobjc-arc
 PGPUnlock_LDFLAGS = -v
 
