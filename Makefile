@@ -15,6 +15,7 @@ include $(THEOS)/makefiles/common.mk
 TWEAK_NAME = PGPUnlock
 
 PGPUnlock_FRAMEWORKS = UIKit
+PGPUnlock_PRIVATE_FRAMEWORKS = UIKitCore
 
 PGPUnlock_FILES = Tweak.xm
 PGPUnlock_CFLAGS = -fobjc-arc
