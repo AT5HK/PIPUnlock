@@ -1,5 +1,7 @@
 @interface SBPIPInteractionController : NSObject
     -(CGPoint)_currentPosition;
+    - (void)setStashed:(BOOL)stashed;
+
 @end
 
 @interface SBPIPWindow : UIView
@@ -34,6 +36,16 @@
 @property (nonatomic,readonly) const double* _maximumPoint;
 @end
 
-
+typedef struct SBPIPPositionInteractionStateContext {
+    BOOL isStashed;
+    BOOL isInteractive;
+    BOOL hasActiveGesture;
+    BOOL isFreelyPositionable;
+    CGPoint projectedPosition;
+    CGPoint initialPosition;
+    CGPoint currentPosition;
+    CGFloat currentPositionStashProgress;
+    CGFloat projectedPositionStashProgress;
+} SBPIPPositionInteractionStateContext;
 // template <typename Type_>
 // static inline Type_ &MSHookIvar(id self, const char *name);
