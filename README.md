@@ -1,1 +1,1 @@
-Can more PIP anywhere but **Is not finished**
+Can move PIP anywhere on the screen without restriction but **Is not finished**
